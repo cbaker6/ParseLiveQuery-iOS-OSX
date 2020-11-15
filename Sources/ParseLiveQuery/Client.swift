@@ -154,8 +154,8 @@ extension Client {
         )
         subscriptions.append(subscriptionRecord)
 
+        self.reconnect()
         if let socket = socket {
-            self.reconnect()
             socket.onEvent = { event in
                 switch event {
                 case .connected(_):
