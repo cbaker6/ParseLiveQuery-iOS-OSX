@@ -47,6 +47,28 @@ jobs:
       - run: bash <(curl -s https://codecov.io/bash)
       - store_test_results:
           path: build/reports
+  watchos:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache: *cache-pull
+      - run: *prepare
+      - save_cache: *cache-push
+      - run: xcodebuild build -workspace ParseLiveQuery.xcworkspace -scheme ParseLiveQuery-watchOS -configuration Debug GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES | xcpretty -c;
+      - run: bash <(curl -s https://codecov.io/bash)
+      - store_test_results:
+          path: build/reports
+  tvos:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache: *cache-pull
+      - run: *prepare
+      - save_cache: *cache-push
+      - run: xcodebuild build -workspace ParseLiveQuery.xcworkspace -scheme ParseLiveQuery-tvOS -configuration Debug GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES | xcpretty -c;
+      - run: bash <(curl -s https://codecov.io/bash)
+      - store_test_results:
+          path: build/reports
   demo:
     <<: *defaults
     steps:
@@ -75,6 +97,8 @@ workflows:
     jobs:
       - ios
       - macos
+      - watchos
+      - tvos
       - demo
       - carthage:
           requires:
