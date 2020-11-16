@@ -18,12 +18,12 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '9.0'
   s.tvos.deployment_target = '10.0'
   s.watchos.deployment_target = '2.0'
-  s.osx.deployment_target = '10.12'
+  s.osx.deployment_target = '10.10'
 
   s.source_files = 'Sources/ParseLiveQuery/**/*.{swift,h}'
   s.module_name = 'ParseLiveQuery'
 
-  s.dependency 'Parse', '~> 1.19.1'
+  s.dependency 'Parse', '~> 1.19.0'
   s.dependency 'Bolts-Swift', '~> 1.5.0'
   s.dependency 'Starscream', '~> 4.0.4'
 
